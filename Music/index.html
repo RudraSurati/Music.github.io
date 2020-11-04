@@ -1,0 +1,363 @@
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Music Player</title>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
+			<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAMAAAANmfvwAAAAeFBMVEV119kAAAD////39/f5+fn19fX4+Pjw8PDs7Oxv1tj7+Ph329153+H8/Py45ud74uTy/PzR8PHJ6OmB2dsSISFDe3yC7vBuyctXn6FovsBdq6w9cHFKh4ir4OItUlPi7OwZLS0yW1wkQkJjtbdRlJUIDxA2ZGQNGBgnqJ1zAAAB90lEQVQ4jXVU27arIAwkCqIoYFutl1rtxbb//4cnBOj27HZnuXyI40wSJrBEyESKRKZJznWe8HyT0C4hmUgzkWWCp/ikXFFsEvgwmWmpudSpTJSq98aczW7RSiaYEETGAm+OvKYsQjDzI5QTC0cWZfDLO4rCKKmF0CLVTGRccC7qwwZAoAOKe4gXqn8BCLREIWxVR0RZWcZsVQaMpDJZiqEOAbDOgDH3AXRQ7isJGSKp7pf+BRTNQJjCSDe6nCe5R/TX8dZCCOsxJMRTRSTl/Tq1/dxECPFg65lgOlX0Q3kZ29PaR5bjpaJydOaEqJ1y7W/9eoXH6eQh0BPNgkKJ2jtINcNz7uHZtW03E2R2NMVOScZ9KZb+fXXu7V7HB1hfjGC5hzCCtC10A0xPaI4A1NJZOaHz/5C7g0xdgBiVM/FVyD4hCqGl1C6U6wLLnbr5cR8glLt3QmKhpsNEqOnRrhCarr2laEbVK04NbtbeoKHRlYosFQ5geEMmOwLEA0B7u5P2xzi+IW0DI5EUwVKJDGYY4hnCa/AI82mp/k9LSfndmBl6NlhK6+WbvWu/YixsgvxcktotDydLCbdS8nPV/ApmUSh3K2xYXNjSYCLeEexnvaXSyw633uxrpTCBLJpYwg0h8MErw18em0SWCje6KBTuCJfgm8Q/Yfchp9fhA34AAAAASUVORK5CYII=">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+			<style>
+				@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@1,531&display=swap');
+				*,
+				*::before,
+				*::after {
+					margin: 0;
+					padding: 0;
+					box-sizing: border-box;
+				}
+				html{
+					font-size: 62.5%;
+					font-family: 'Jost', sans-serif;
+				}
+				.main_div{
+					width: 100vw;
+					height: 100vh;
+					/* color: #f6f6f6; */
+					background: rgb(2,0,36);
+			background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(1,239,96,1) 72%, rgba(1,232,136,1) 79%, rgba(2,255,0,1) 87%, rgba(0,212,255,1) 100%);
+					display: grid;
+					place-items: center;
+				}
+				.music_container{
+					width: 35rem;
+					height: 55rem;
+					background: linear-gradient(#2980b9,#6dd5fa,#ffffff);
+					color: #f6f6f6;
+					border-radius: 2rem;
+					box-shadow: 0 1.2rem 3rem 0.5rem rgba(0, 0, 0, 0.2);
+					padding: 3rem;
+					text-align: center;
+				}
+				.music_container #title {
+					text-transform: uppercase;
+					letter-spacing: 0.2rem;
+					word-spacing: 0.5rem;
+					color: #171717;
+					margin: 0rem 0 0.5rem 0;
+					font-size: 2.5rem;
+					font-weight: 500;
+					text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.3);
+				}
+				.music_container #artist {
+					color: #cccaca;
+					text-transform: capitalize;
+					letter-spacing: 0.1rem;
+					font-size: 2rem;
+					margin-bottom: 4rem;
+					font-weight: 300;
+				}
+				.img_container{
+					width: 25rem;
+					height: 25rem;
+					margin: auto;
+				}
+				img{
+					width: 100%;
+					height: 100%;
+					border-radius: 50%;
+					object-fit: cover;
+					box-shadow: 0 1.2rem 3rem 0.5rem rgba(0, 0, 0, 0.4);
+				}
+				.music_controls{
+					width: 20rem;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					margin: auto;
+					margin-top: 1rem;
+				}
+				.music_controls .fas{
+					color: #111111;
+					font-size: 2rem;
+					cursor: pointer;
+					filter: drop-shadow(0 1.2rem 3rem 0.5rem rgba(0, 0, 0, 0.4));
+				}
+				.music_controls .main_button{
+					width: 5rem;
+					height: 5rem;
+					border-radius: 50%;
+					background-color: #111;
+					color: #f6f6f6;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					font-size: 1.4rem;
+				}
+				.music_controls .fas:hover{
+					color: grey;
+				}
+				.music_controls .fa-play:hover{
+					background-color: #f6f6f6;
+					color: #000;
+					box-shadow: 0 1rem 2rem 0.2rem rgba(0, 0, 0, 1.0);
+				}
+				::selection{
+					background-color: #fff;
+						color: #000;
+				}
+				.anime{
+					animation: rotatePlay 3s linear infinite;
+				}
+				@keyframes rotatePlay{
+					from{
+						transform: rotate(0deg);
+					}
+					to{
+						transform: rotate(360deg);
+					}
+				}
+				/* progress style */
+				.progressbar_container{
+					width: 100%;
+					height: auto;
+					padding: 1rem 0;
+					margin-top: 1rem;
+				}
+				.progress_div{
+					width: 100%;
+					height: 0.5rem;
+					box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+						0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
+						0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
+					border-radius: 4rem;
+					position: relative;
+					margin-top: 0.5rem;
+					transition: all 1s linear;
+					-moz-transition: all 1s linear;
+					-o-transition: all 1s linear;
+					-webkit-transition: all 1s linear;
+					cursor: pointer;
+					-webkit-appearance: none;
+					appearance: none;
+				}
+				.progress{
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 0%;
+					height: 100%;
+					background: #fc4a1a; /* fallback for old browsers */
+					background: -webkit-linear-gradient(to top, #fc4a1a, #f7b733); /* Chrome 10-25, Safari 5.1-6 */
+					background: linear-gradient(to top, #fc4a1a, #f7b733);
+					border-radius: 4rem;
+					cursor: pointer;
+					-webkit-appearance: none;
+					appearance: none;
+				}
+				.progress_duration_meter{
+					display: flex;
+					justify-content: space-between;
+					font-size: 1.2rem;
+				}
+			</style>
+		</head>
+		<body>
+			
+			<div class="main_div">
+				<div class="music_container" style="margin-bottom: 100px;">
+					<h2 id="title">get ready to fight</h2>
+					<h3 id="artist">Tiger Shroff</h3>
+					<div class="img_container">
+						<img src="images/Rudra-1.jpg" data-toggle="modal" data-target="#myModal">
+						<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="bg-dark">
+      	<div class="modal-header">
+        <h4 class="modal-title">Video</h4>
+        <button type="button" style="color: #fff;" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <iframe width="300" height="300" src="https://www.youtube.com/embed/h6aGikIL-I4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+					</div>
+				<audio src="music/Rudra-1.m4a">
+					
+				</audio>
+				<!-- progress bar -->
+				<div class="progressbar_container" id="">
+					<div class="progress_duration_meter">
+						<div id="current_time" style="color: #000;">0:00</div>
+						<div id="duration" style="color: #000;">2:19</div>
+					</div>
+					<div class="progress_div" id="progress_div">
+						<div class="progress" id="progress"></div>
+					</div>
+				</div>
+				<!-- controls -->
+				<div class="music_controls">
+					<i class="fas fa-backward" id="prev" title="Previous"></i>
+					<i class="fas fa-play main_button" id="play" title="Play"></i>
+					<i class="fas fa-forward" id="next" title="Next"></i>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			const music = document.querySelector('audio');
+			const img = document.querySelector('img');
+			//
+				const iframe = document.querySelector('iframe');
+			//
+			const play = document.getElementById("play");
+			const title = document.getElementById("title");
+			const artist = document.getElementById("artist");
+			const prev = document.getElementById("prev");
+			const next = document.getElementById("next");
+			let progress = document.getElementById("progress");
+			let total_duration = document.getElementById("duration");
+			let current_time = document.getElementById("current_time");
+			const progress_div = document.getElementById('progress_div');
+			const songs = [
+			{
+				name : "Rudra-1",
+				title : "GET READY TO FIGHT",
+				artist : "Tiger Shroff",
+			},
+			{
+				name : "Rudra-2",
+				title : "GET READY TO FIGHT AGAIN",
+				artist : "Tiger Shroff",
+			},
+			{
+				name : "Rudra-3",
+				title : "GET READY TO FIGHT RELOADED",
+				artist : "Tiger Shroff",
+			},
+			{
+				name : "Rudra-4",
+				title : "TUJHE RAB MANA",
+				artist : "Tiger Shroff",
+			},
+			{
+				name : "Rudra-5",
+				title : "FAASLON MEIN",
+				artist : "Tiger Shroff",
+			},
+			{
+				name : "Rudra-6",
+				title : "A NAZNEEN SUNO NA",
+				artist : "Abhijeet",
+			}
+			];
+			let isPlaying = false;
+			// for play function
+			const playMusic = () => {
+				isPlaying = true;
+				music.play();
+				play.classList.replace("fa-play", "fa-pause");
+				img.classList.add("anime");
+			};
+			// for pause function
+			const pauseMusic = () => {
+				isPlaying = false;
+				music.pause();
+				play.classList.replace("fa-pause", "fa-play");
+				img.classList.remove("anime");
+			};
+			play.addEventListener("click", () => {
+					isPlaying ? pauseMusic() : playMusic();
+			})
+			const loadSong = (songs) => {
+				title.textContent = songs.title;
+				artist.textContent = songs.artist;
+				music.src = "music/" + songs.name + ".m4a";
+				img.src = "images/" + songs.name + ".jpg";
+			};
+			songIndex = 0;
+			const nextSong = () => {
+				songIndex = (songIndex + 1) % songs.length;
+				loadSong(songs[songIndex]);
+				music.play();
+				play.classList.replace("fa-play", "fa-pause");
+				img.classList.add("anime");
+			}
+			const prevSong = () => {
+				songIndex = (songIndex - 1 + songs.length) % songs.length;
+				loadSong(songs[songIndex]);
+				music.play();
+				play.classList.replace("fa-play", "fa-pause");
+				img.classList.add("anime");
+			}
+			// progress js work
+			music.addEventListener("timeupdate", (event) => {
+				console.log(event);
+				const {currentTime, duration} = event.srcElement;
+				console.log(currentTime);
+				console.log(duration);
+				let progress_time = (currentTime / duration) * 100;
+				console.log(progress_time);
+				progress.style.width = `${progress_time}%`;
+				// music duration update
+				let min_duration = Math.floor(duration / 60);
+				let sec_duration = Math.floor(duration % 60);
+				console.log(min_duration);
+				console.log(sec_duration);
+				let tot_duration = `${min_duration}:${sec_duration}`;
+				if(duration){
+					total_duration.textContent = `${tot_duration}`;
+				}
+				// current duration update
+				let min_currentTime = Math.floor(currentTime / 60);
+				let sec_currentTime = Math.floor(currentTime % 60);
+				if (sec_currentTime < 10) {
+					sec_currentTime = `0${sec_currentTime}`;
+				}
+				let tot_currentTime = `${min_currentTime}:${sec_currentTime}`;
+				current_time.textContent = `${tot_currentTime}`;
+			});
+			// progress onclick functionality
+			progress_div.addEventListener('click', (event) => {
+				console.log(event);
+				const { duration } = music;
+				let move_progress = (event.offsetX / event.srcElement.clientWidth) * duration;
+				console.log(duration);
+				console.log(move_progress);
+				music.currentTime = move_progress;
+			})
+			// if music end call next song function
+			music.addEventListener('ended' , nextSong);
+			next.addEventListener('click', nextSong);
+			prev.addEventListener('click', prevSong);
+
+			// video 
+
+			img.addEventListener("click", function() {
+				music.pause();
+				play.classList.replace("fa-pause", "fa-play");
+				img.classList.remove("anime");
+			})
+		</script>
+	</body>
+	</html>
